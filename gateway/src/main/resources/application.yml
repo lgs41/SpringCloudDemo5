@@ -1,0 +1,23 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+
+#    ?gateway??Nacos??????
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user_center_route
+          uri: lb://user-center
+          predicates:
+            - Path=/user/**
